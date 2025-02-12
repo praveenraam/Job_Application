@@ -14,14 +14,13 @@ public class JobService {
     public List<Job> findAll(){
         return repo.findAll();
     }
+    public Job findById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
 
     public String createJob(Job job){
         repo.save(job);
         return "Added successfully";
-    }
-
-    public Job findById(Long id) {
-        return repo.findById(id).orElse(null);
     }
 
     public boolean deleteById(Long id) {

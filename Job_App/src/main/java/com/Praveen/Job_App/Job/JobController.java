@@ -17,11 +17,11 @@ public class JobController {
     private JobService service;
 
     @GetMapping
-    public ResponseEntity<List<Job>> findAll(){
+    public ResponseEntity<List<Job>> getAllJobs(){
         return ResponseEntity.ok(service.findAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Job> findById(@PathVariable Long id){
+    public ResponseEntity<Job> getJobById(@PathVariable Long id){
         Job returnedValue = service.findById(id);
 
         if(returnedValue != null) return new ResponseEntity<>(returnedValue,HttpStatus.OK);
@@ -34,7 +34,7 @@ public class JobController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Boolean> updateById(@PathVariable Long id,@RequestBody Job job){
+    public ResponseEntity<Boolean> updateJobById(@PathVariable Long id,@RequestBody Job job){
         if(service.updateById(id,job)){
             return new ResponseEntity<>(true,HttpStatus.OK);
         }
