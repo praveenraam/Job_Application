@@ -1,5 +1,6 @@
 package com.Praveen.Job_App.Job;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,52 +10,47 @@ import java.util.List;
 
 @Service
 public class JobService {
-    private List<Job> jobs = new ArrayList<>();
-    private static Long nextID = 1L;
-    public ResponseEntity<List<Job>> findAll(){
-        return new ResponseEntity<>(jobs, HttpStatus.OK);
+
+    @Autowired
+    JobRepository repo;
+
+    public List<Job> findAll(){
+        return repo.findAll();
     }
 
-    public ResponseEntity<String> createJob(Job job){
-        job.setId(nextID);
-        nextID+=1;
-        jobs.add(job);
-        return new ResponseEntity<>("Added successfully",HttpStatus.CREATED);
+    public String createJob(Job job){
+        repo.save(job);
+        return "Added successfully";
     }
 
-    public ResponseEntity<Job> findById(Long id) {
-
-        for(Job job : jobs)
-            if(job.getId() == id)
-                return new ResponseEntity<>(job,HttpStatus.OK);
-
-        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+    public Job findById(Long id) {
+        return repo.findById(id).orElse(null);
     }
 
     public boolean deleteById(Long id) {
-
-        for(Job job : jobs)
-            if(job.getId() == id){
-                jobs.remove(job);
-                return true;
-            }
-        return false;
+        try{
+            repo.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     public boolean updateById(Long id, Job job) {
 
-        for(Job jobIter : jobs)
-            if(jobIter.getId() == id){
-                jobIter.setDescription(job.getDescription());
-                jobIter.setLocation(job.getLocation());
-                jobIter.setTitle(job.getTitle());
-                jobIter.setMaxSalary(job.getMaxSalary());
-                jobIter.setMinSalary(job.getMinSalary());
+        Job jobPresent = this.findById(id);
 
-                return true;
-            }
+        if(jobPresent == null) return false;
 
-        return false;
+        jobPresent.setTitle(job.getTitle());
+        jobPresent.setDescription(job.getDescription());
+        jobPresent.setLocation(job.getLocation());
+        jobPresent.setMaxSalary(job.getMaxSalary());
+        jobPresent.setMinSalary(job.getMinSalary());
+
+        repo.save(jobPresent);
+        return true;
     }
 }
 

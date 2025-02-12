@@ -1,7 +1,17 @@
 package com.Praveen.Job_App.Job;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import javax.annotation.processing.Generated;
+
+@Entity
 public class Job {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
     private String description;
@@ -16,6 +26,10 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    // Mandatory to have
+    public Job() {
     }
 
     public long getId() {

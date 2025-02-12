@@ -18,16 +18,19 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<List<Job>> findAll(){
-        return service.findAll();
+        return ResponseEntity.ok(service.findAll());
     }
     @GetMapping("/{id}")
     public ResponseEntity<Job> findById(@PathVariable Long id){
-        return service.findById(id);
+        Job returnedValue = service.findById(id);
+
+        if(returnedValue != null) return new ResponseEntity<>(returnedValue,HttpStatus.OK);
+        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job){
-        return service.createJob(job);
+        return new ResponseEntity<>(service.createJob(job),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -43,7 +46,8 @@ public class JobController {
         if(service.deleteById(id)){
             return new ResponseEntity<>(true, HttpStatus.OK);
         };
-        return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+        return new ResponseEntity
+                <>(false,HttpStatus.NOT_FOUND);
     }
 
 }
