@@ -1,6 +1,7 @@
 package com.Praveen.Job_App.Company;
 
 import com.Praveen.Job_App.Job.Job;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,7 +14,9 @@ public class Company {
     private Long id;
     private String name;
     private String description;
-    @OneToMany
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobsOpened;
 //    @OneToMany
 //    private List<Reviews> reviewsPosted;

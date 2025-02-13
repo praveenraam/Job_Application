@@ -24,6 +24,9 @@ public class JobService {
     }
 
     public boolean deleteById(Long id) {
+
+        if(!repo.existsById(id)) return false;
+
         try{
             repo.deleteById(id);
             return true;

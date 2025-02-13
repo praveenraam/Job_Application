@@ -36,5 +36,16 @@ public class CompanyService {
     }
 
 
+    public boolean deleteById(Long id) {
 
+        if(!repo.existsById(id)) return false;
+
+        try{
+            repo.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 }

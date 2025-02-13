@@ -42,12 +42,12 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable Long id){
+    public ResponseEntity<Boolean> deleteJobById(@PathVariable Long id){
         if(service.deleteById(id)){
             return new ResponseEntity<>(true, HttpStatus.OK);
         };
         return new ResponseEntity
-                <>(false,HttpStatus.NOT_FOUND);
+                <>(false,HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
