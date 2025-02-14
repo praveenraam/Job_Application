@@ -39,7 +39,6 @@ public class JobService {
     public boolean updateById(Long id, Job job) {
 
         Job jobPresent = this.findById(id);
-
         if(jobPresent == null) return false;
 
         jobPresent.setTitle(job.getTitle());

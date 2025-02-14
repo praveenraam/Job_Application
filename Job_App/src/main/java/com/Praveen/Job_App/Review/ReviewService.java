@@ -38,7 +38,32 @@ public class ReviewService {
                 .filter(review -> review.getId().equals(id))
                 .findFirst()
                 .orElse(null);
-
     }
+
+    public boolean UpdateById(Long id,Long companyId,Review review){
+
+        Review updatingReview = this.findById(companyId,id);
+        if(updatingReview == null) return false;
+
+        updatingReview.setDescription(review.getDescription());
+        updatingReview.setRating(review.getRating());
+        updatingReview.setTitle(review.getTitle());
+
+        repo.save(updatingReview);
+        return true;
+    }
+
+    public boolean deleteById(Long Id){
+        if(!repo.existsById(Id)) return false;
+
+        try{
+            repo.deleteById(Id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
 
 }

@@ -46,8 +46,7 @@ public class JobController {
         if(service.deleteById(id)){
             return new ResponseEntity<>(true, HttpStatus.OK);
         };
-        return new ResponseEntity
-                <>(false,HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(false,HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
