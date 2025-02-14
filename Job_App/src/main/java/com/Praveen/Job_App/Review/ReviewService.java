@@ -29,4 +29,16 @@ public class ReviewService {
 
         return "Review Added Successfully";
     }
+
+    public Review findById(Long companyId, Long id) {
+
+        List<Review> reviewsOfCompany = this.findAll(companyId);
+
+        return reviewsOfCompany.stream()
+                .filter(review -> review.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+    }
+
 }

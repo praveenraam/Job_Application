@@ -24,4 +24,12 @@ public class ReviewController {
         return new ResponseEntity<>(service.createReview(companyId,review),HttpStatus.CREATED);
     }
 
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<Review> getReviewById(@PathVariable Long companyId,@PathVariable Long reviewId){
+        Review review = service.findById(companyId,reviewId);
+
+        if(review != null) return new ResponseEntity<>(review,HttpStatus.OK);
+        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+    }
+
 }
