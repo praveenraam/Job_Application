@@ -1,10 +1,12 @@
 package com.Praveen.Job_App.Company;
 
 import com.Praveen.Job_App.Job.Job;
+import com.Praveen.Job_App.Review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Company {
@@ -18,8 +20,10 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Job> jobsOpened;
-//    @OneToMany
-//    private List<Reviews> reviewsPosted;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviewsPosted;
 
 
     public Company() {
@@ -51,5 +55,13 @@ public class Company {
     }
     public void setJobsOpened(List<Job> jobsOpened) {
         this.jobsOpened = jobsOpened;
+    }
+
+    public List<Review> getReviewsPosted() {
+        return reviewsPosted;
+    }
+
+    public void setReviewsPosted(List<Review> reviewsPosted) {
+        this.reviewsPosted = reviewsPosted;
     }
 }
