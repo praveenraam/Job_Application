@@ -1,7 +1,5 @@
 package com.praveenraam.companyMicro.Company;
 
-import com.Praveen.Job_App.Job.Job;
-import com.Praveen.Job_App.Review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -15,15 +13,6 @@ public class Company {
     private Long id;
     private String name;
     private String description;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "company")
-    private List<Job> jobsOpened;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "company")
-    private List<Review> reviewsPosted;
-
 
     public Company() {
     }
@@ -47,20 +36,5 @@ public class Company {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Job> getJobsOpened() {
-        return jobsOpened;
-    }
-    public void setJobsOpened(List<Job> jobsOpened) {
-        this.jobsOpened = jobsOpened;
-    }
-
-    public List<Review> getReviewsPosted() {
-        return reviewsPosted;
-    }
-
-    public void setReviewsPosted(List<Review> reviewsPosted) {
-        this.reviewsPosted = reviewsPosted;
     }
 }

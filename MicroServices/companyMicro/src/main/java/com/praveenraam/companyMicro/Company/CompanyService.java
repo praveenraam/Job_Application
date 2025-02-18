@@ -25,12 +25,10 @@ public class CompanyService {
 
     public boolean updateById(Long id,Company company){
         Company companyPresent = this.findById(id);
-
         if(companyPresent == null) return false;
 
         companyPresent.setName(company.getName());
         companyPresent.setDescription(company.getDescription());
-        companyPresent.setJobsOpened(company.getJobsOpened());
 
         repo.save(companyPresent);
         return true;
