@@ -46,6 +46,7 @@ public class JobService {
         jobPresent.setLocation(job.getLocation());
         jobPresent.setMaxSalary(job.getMaxSalary());
         jobPresent.setMinSalary(job.getMinSalary());
+        jobPresent.setCompanyId(job.getCompanyId());
 
         repo.save(jobPresent);
         return true;

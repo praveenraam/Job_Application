@@ -1,6 +1,5 @@
 package com.praveenraam.jobMicro.Job;
 
-import com.Praveen.Job_App.Company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,12 +28,12 @@ public class Job {
     public Job() {
     }
 
-    public Company getCompany() {
-        return company;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public long getId() {
