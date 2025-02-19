@@ -1,6 +1,5 @@
 package com.praveenraam.reviewMicro.Review;
 
-import com.Praveen.Job_App.Company.Company;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -13,20 +12,18 @@ public class Review {
     private String title;
     private String description;
     private double rating;
+    private Long companyId;
 
-    @JsonIgnore
-    @ManyToOne
-    private Company company;
 
     public Review(){
     }
 
-    public Company getCompany() {
-        return company;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Long getId() {
